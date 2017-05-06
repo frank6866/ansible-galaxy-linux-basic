@@ -1,0 +1,30 @@
+---
+# defaults file for linux-basic
+
+linux_basic_disable_firewall: "false"
+linux_basic_disable_selinux: "false"
+
+linux_basic_ntp_installed: "false"
+
+linux_basic_ntp_servers:
+  - "0.cn.pool.ntp.org"
+  - "1.cn.pool.ntp.org"
+  - "2.cn.pool.ntp.org"
+  - "3.cn.pool.ntp.org"
+
+linux_basic_install_epel: "false"
+
+linux_basic_installed_packages:
+  - "htop"
+  - "nload"
+  - "tree"
+  - "pciutils"
+  - "ethtool"
+  - "bind-utils"
+  - "tcpdump"
+  - "sysstat"
+  - "sysbench"
+  - "fio"
+  - "iperf"
+  - "smartctl"
+  - "tmux"

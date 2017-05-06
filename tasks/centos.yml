@@ -1,0 +1,37 @@
+---
+
+- name: stop and disable firewalld
+  service: name=firewalld state=stopped enabled=no
+  when: linux_basic_disable_firewall
+  ignore_errors: true
+
+- name: disable selinux
+  lineinfile: dest=/etc/selinux/config regexp="^SELINUX=" line="SELINUX=disabled"
+  when: linux_basic_disable_selinux
+
+- name: stop selinux
+  selinux: state=disabled
+  when: linux_basic_disable_selinux
+
+- name: install ntp
+  yum: name=ntp state=present
+  when: linux_basic_ntp_installed
+
+- name: template /etc/ntp.conf
+  template: src=etc/ntp.conf dest=/etc/ntp.conf mode=644
+  notify: restart ntpd
+  when: linux_basic_ntp_installed
+
+- name: start and enable ntpd
+  service: name=ntpd state=started enabled=yes
+  when: linux_basic_ntp_installed
+
+- name: install epel
+  yum: name=epel-release state=present
+  when: linux_basic_install_epel
+
+- name: install packages
+  yum: name={{ item }} state=present
+  with_items: "{{ linux_basic_installed_packages | default([])}}"
+  when: linux_basic_install_epel
+
