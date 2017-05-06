@@ -6,6 +6,7 @@ This role is used to config linux basic setting. Supporting features as follows:
 * disable selinux(default operation is not change selinux settings)
 * enable ntp(default operation is not change ntp settings)
 * install epel(default operation is not installing epel)
+* install user defined packages
 
 ## Inventory file demo
 
