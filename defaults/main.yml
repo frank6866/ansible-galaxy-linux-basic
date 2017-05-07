@@ -26,5 +26,7 @@ linux_basic_installed_packages:
   - "sysbench"
   - "fio"
   - "iperf"
-  - "smartctl"
+  - "smartmontools"
   - "tmux"
+  - "iptraf"
+

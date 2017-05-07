@@ -21,7 +21,7 @@ linux_basic_disable_firewall=true
 linux_basic_disable_selinux=true
 linux_basic_ntp_installed=true
 linux_basic_install_epel=true
-linux_basic_installed_packages=["htop", "nload", "tree", "tmux", "smartmontools", "pciutils", "ethtool", "bind-utils", "tcpdump", "sysstat", "sysbench", "fio", "iperf"]
+linux_basic_installed_packages=["htop", "nload", "tree", "tmux", "smartmontools", "pciutils", "ethtool", "bind-utils", "tcpdump", "sysstat", "sysbench", "fio", "iperf", "iptraf"]
 
 ```
 
