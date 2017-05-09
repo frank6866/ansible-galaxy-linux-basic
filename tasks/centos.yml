@@ -35,3 +35,9 @@
   with_items: "{{ linux_basic_installed_packages | default([])}}"
   when: linux_basic_install_epel
 
+- name: config /etc/hosts file when not registered in DNS
+  lineinfile: dest=/etc/hosts regexp="{{ item.ip }}    {{ item.hostname }}"
+              line="{{ item.ip }}    {{ item.hostname }}" state={{ item.state }}
+              backup=yes
+  with_items: "{{ ip_hostname_in_etc_hosts | default([])}}"
+  when: ip_hostname_in_etc_hosts is defined

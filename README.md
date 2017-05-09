@@ -7,6 +7,7 @@ This role is used to config linux basic setting. Supporting features as follows:
 * enable ntp(default operation is not change ntp settings)
 * install epel(default operation is not installing epel)
 * install user defined packages
+* config /etc/hosts file
 
 ## Inventory file demo
 
@@ -39,6 +40,20 @@ If you want to install epel, set **linux_basic_install_epel** variable to true.
 If you want to install some package ,you should first set **linux_basic_install_epel** variable to true. And then define the packages, for example:
 
 > linux_basic_installed_packages=["htop", "nload", "tree", "tmux", "smartmontools", "pciutils", "ethtool", "bind-utils", "tcpdump", "sysstat", "sysbench", "fio", "iperf"]
+
+
+If you want to config /etc/hosts file, setting the **** variable:
+
+```
+ip_hostname_in_etc_hosts:
+  - ip: 192.168.168.201
+    hostname: vagrant-1
+    state: present
+  - ip: 192.168.168.202
+    hostname: vagrant-2
+    state: present
+```
+
 
 ## Example Playbook
 
