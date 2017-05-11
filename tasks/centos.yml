@@ -6,12 +6,18 @@
   ignore_errors: true
 
 - name: disable selinux
-  lineinfile: dest=/etc/selinux/config regexp="^SELINUX=" line="SELINUX=disabled"
-  when: linux_basic_disable_selinux
-
-- name: stop selinux
   selinux: state=disabled
   when: linux_basic_disable_selinux
+
+- name: set timezone
+  timezone: name={{ linux_basic_timezone }}
+  when: linux_basic_timezone is defined
+  ignore_errors: true
+
+- name: setting sysctl entries
+  sysctl: name={{ item.name }} value={{ item.value }} ignoreerrors=yes
+  with_items: "{{ linux_basic_sysctl_pair | default([])}}"
+  when: linux_basic_sysctl_pair is defined
 
 - name: install ntp
   yum: name=ntp state=present

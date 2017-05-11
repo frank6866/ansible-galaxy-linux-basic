@@ -8,6 +8,7 @@ This role is used to config linux basic setting. Supporting features as follows:
 * install epel(default operation is not installing epel)
 * install user defined packages
 * config /etc/hosts file
+* add sysctl entries
 
 ## Inventory file demo
 
@@ -33,6 +34,8 @@ If you want to disable firewalld, set **linux_basic_disable_firewall** variable 
 
 If you want to disable selinux, set **linux_basic_disable_selinux** variable to true.
 
+If you want to set timezone, set **linux_basic_timezone** variable to you timezone as you want, eg, "Asia/Shanghai"
+
 If you want to install ntp, set **linux_basic_ntp_installed** variable to true.
 
 If you want to install epel, set **linux_basic_install_epel** variable to true.
@@ -42,7 +45,7 @@ If you want to install some package ,you should first set **linux_basic_install_
 > linux_basic_installed_packages=["htop", "nload", "tree", "tmux", "smartmontools", "pciutils", "ethtool", "bind-utils", "tcpdump", "sysstat", "sysbench", "fio", "iperf"]
 
 
-If you want to config /etc/hosts file, setting the **** variable:
+If you want to config /etc/hosts file, setting the **ip_hostname_in_etc_hosts** variable:
 
 ```
 ip_hostname_in_etc_hosts:
@@ -54,6 +57,16 @@ ip_hostname_in_etc_hosts:
     state: present
 ```
 
+
+If you want to define sysctl entries, setting the **ip_hostname_in_etc_hosts** variable:
+
+```
+linux_basic_sysctl_pair:
+  - name: vm.swappiness
+    value: 0
+  - name: net.ipv4.ip_forward
+    value: 1
+```
 
 ## Example Playbook
 
