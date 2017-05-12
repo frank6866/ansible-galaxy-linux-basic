@@ -9,6 +9,7 @@ This role is used to config linux basic setting. Supporting features as follows:
 * install user defined packages
 * config /etc/hosts file
 * add sysctl entries
+* add sudo/normal users
 
 ## Inventory file demo
 
@@ -67,6 +68,20 @@ linux_basic_sysctl_pair:
   - name: net.ipv4.ip_forward
     value: 1
 ```
+
+
+If you want to create sudo users, you can set the **linux_basic_users** variable:
+
+```
+linux_basic_users:
+  - name: frank6866
+    state: present
+    public_key: ssh-rsa xxx
+    group: wheel
+```
+
+If you want to create normal users, remove the group key in **linux_basic_users** variable.
+
 
 ## Example Playbook
 

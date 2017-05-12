@@ -47,3 +47,26 @@
               backup=yes
   with_items: "{{ ip_hostname_in_etc_hosts | default([])}}"
   when: ip_hostname_in_etc_hosts is defined
+
+
+- name: set wheel group executing sudo without password
+  lineinfile: dest=/etc/sudoers regexp="^%wheel" state=present
+              line="%wheel ALL=(ALL) NOPASSWD{{ ":" }} ALL"
+              backup=yes
+
+- name: create users
+  user: name={{ item.name }} groups={{ item.group | default(omit)}}  shell=/bin/bash state={{ item. state }}
+  with_items:
+    - "{{ linux_basic_users | default([])}}"
+  when: linux_basic_users is defined
+
+- name: add public key for user
+  authorized_key: user={{ item.name }} key={{ item.public_key }}  state={{ item. state }}
+  with_items:
+    - "{{ linux_basic_users | default([])}}"
+  when: linux_basic_users is defined
+  ignore_errors: true
+
+
+
+
